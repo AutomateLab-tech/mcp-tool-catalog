@@ -1,0 +1,26 @@
+# Generated artifacts (regenerated each refresh)
+hf-dataset/data/*.parquet
+hf-dataset/dataset_infos.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Local scratch
+snapshots/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Local secrets (HF_TOKEN lives in GH Actions secrets, never on disk)
+.env
