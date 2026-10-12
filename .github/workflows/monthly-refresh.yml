@@ -10,7 +10,30 @@ permissions:
   contents: write
 
 jobs:
+  campaign-window:
+    runs-on: ubuntu-latest
+    outputs:
+      publish: ${{ steps.window.outputs.publish }}
+    steps:
+      - id: window
+        name: Check prepared campaign window
+        shell: bash
+        run: |
+          python - <<'PY'
+          import os
+          from datetime import datetime, timezone
+          day = datetime.now(timezone.utc).date().isoformat()
+          blocked = os.environ["GITHUB_EVENT_NAME"] == "schedule" and "2026-10-12" <= day < "2026-11-12"
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write("publish=" + str(not blocked).lower() + "\n")
+          if blocked:
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+                  summary.write("The prepared November catalog release owns this scheduled slot. Normal monthly publishing resumes after 12 November 2026. Manual dispatch remains available.\n")
+          PY
+
   refresh:
+    needs: campaign-window
+    if: needs.campaign-window.outputs.publish == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 240
 
