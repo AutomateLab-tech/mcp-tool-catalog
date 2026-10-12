@@ -16,6 +16,8 @@ from datetime import date
 from pathlib import Path
 
 import pandas as pd
+from jsonschema.validators import validator_for
+from jsonschema.exceptions import SchemaError
 
 ROOT = Path(__file__).parent
 SRC = ROOT / "data"
@@ -34,6 +36,13 @@ def main():
 
     # Normalise schema. input_schema is nested -- stringify for parquet.
     for t in tools:
+        schema = t.get("input_schema") or {}
+        try:
+            validator_for(schema).check_schema(schema)
+            t["schema_validation_status"] = "valid"
+        except SchemaError:
+            t["schema_validation_status"] = "invalid_recorded_schema"
+        t["schema_dialect"] = schema.get("$schema", "unspecified; checked against default dialect") if isinstance(schema, dict) else "boolean schema"
         t["input_schema"] = json.dumps(t.get("input_schema") or {})
     for s in servers:
         if "tools" in s:
@@ -116,6 +125,8 @@ Three differentiators:
 | `tool_name` | string | `name` field from `tools/list` |
 | `tool_description` | string | `description` field from `tools/list` |
 | `input_schema` | string (JSON) | `inputSchema` field, JSON-encoded for parquet |
+| `schema_validation_status` | string | Metaschema check result; invalid recorded schemas are preserved, not repaired or dropped |
+| `schema_dialect` | string | Declared JSON Schema dialect, or an explicit unspecified value |
 
 ### `servers` split
 | field | type | description |

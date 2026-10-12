@@ -58,6 +58,8 @@ Three differentiators:
 | `tool_name` | string | `name` field from `tools/list` |
 | `tool_description` | string | `description` field from `tools/list` |
 | `input_schema` | string (JSON) | `inputSchema` field, JSON-encoded for parquet |
+| `schema_validation_status` | string | Metaschema check result; invalid recorded schemas are preserved, not repaired or dropped |
+| `schema_dialect` | string | Declared JSON Schema dialect, or an explicit unspecified value |
 
 ### `servers` split
 | field | type | description |
