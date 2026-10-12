@@ -1,0 +1,38 @@
+{
+  "updated_at": "2026-10-12T14:07:09.314715+00:00",
+  "scope": "Only six AL-owned servers were re-probed. Other records retain their previous observations.",
+  "touched": [
+    {
+      "package": "@automatelab/ai-seo-mcp",
+      "tools": 20,
+      "previous_tools": 20
+    },
+    {
+      "package": "@automatelab/n8n-mcp",
+      "tools": 12,
+      "previous_tools": 12
+    },
+    {
+      "package": "@automatelab/citation-intelligence",
+      "tools": 26,
+      "previous_tools": 26
+    },
+    {
+      "package": "@automatelab/content-distribution-mcp",
+      "tools": 8,
+      "previous_tools": 8
+    },
+    {
+      "package": "@automatelab/seo-performance-mcp",
+      "tools": 9,
+      "previous_tools": 9
+    },
+    {
+      "package": "ai-seo-magic-button",
+      "tools": 1,
+      "previous_tools": 1
+    }
+  ],
+  "servers": 926,
+  "tools": 9971
+}

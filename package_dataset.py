@@ -51,6 +51,10 @@ def main():
     total = len(servers_df)
 
     today = date.today().isoformat()
+    manifest_path = SRC / "refresh-manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
+    coverage = manifest.get("scope", "Refresh coverage was not recorded. Consult the per-server observations.")
+    observed_at = manifest.get("updated_at", "unknown")
 
     card = f"""---
 license: cc-by-4.0
@@ -80,7 +84,9 @@ configs:
 
 Machine-introspected catalog of public Model Context Protocol (MCP) servers and the tools each one exposes. Each tool row contains the exact `name`, `description`, and JSON Schema `input_schema` captured by running the server and calling its `tools/list` JSON-RPC endpoint -- not metadata scraping.
 
-**Last extracted:** {today}
+**Snapshot packaged:** {today}
+**Refresh coverage:** {coverage}
+**Observation manifest date:** {observed_at}
 **Servers attempted:** {total}
 **Servers successfully introspected:** {ok}
 **Tools captured:** {len(tools_df)}
@@ -97,7 +103,7 @@ The MCP ecosystem grew from ~1,200 servers in Q1 2025 to ~9,400 servers by April
 
 Three differentiators:
 1. **Actual tool introspection** -- we run each server and capture its `tools/list` response, not its README.
-2. **Full coverage** of npm-published MCP servers (vs. benchmark slices).
+2. **Explicit coverage** of attempted servers, with failures retained alongside successful probes.
 3. **Monthly refresh** with diff-based changelog (vs. static snapshots).
 
 ## Schema

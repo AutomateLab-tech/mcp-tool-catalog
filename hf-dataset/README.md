@@ -26,10 +26,12 @@ configs:
 
 Machine-introspected catalog of public Model Context Protocol (MCP) servers and the tools each one exposes. Each tool row contains the exact `name`, `description`, and JSON Schema `input_schema` captured by running the server and calling its `tools/list` JSON-RPC endpoint -- not metadata scraping.
 
-**Last extracted:** 2026-05-18
-**Servers attempted:** 922
-**Servers successfully introspected:** 359
-**Tools captured:** 9922
+**Snapshot packaged:** 2026-10-12
+**Refresh coverage:** Only six AL-owned servers were re-probed. Other records retain their previous observations.
+**Observation manifest date:** 2026-10-12T14:07:09.314715+00:00
+**Servers attempted:** 926
+**Servers successfully introspected:** 363
+**Tools captured:** 9971
 
 ## Why this dataset exists
 
@@ -39,11 +41,11 @@ The MCP ecosystem grew from ~1,200 servers in Q1 2025 to ~9,400 servers by April
 |---|---|---|---|---|
 | ScaleAI/MCP-Atlas | 36 | yes (benchmark subset) | static | 2,588 |
 | DeepNLP/mcp-servers | 296 | **metadata only** | stale since 2025-03 | ~20 |
-| **automatelab/mcp-servers-tool-catalog** | **922** | **yes (full schemas)** | **monthly** | -- |
+| **automatelab/mcp-servers-tool-catalog** | **926** | **yes (full schemas)** | **monthly** | -- |
 
 Three differentiators:
 1. **Actual tool introspection** -- we run each server and capture its `tools/list` response, not its README.
-2. **Full coverage** of npm-published MCP servers (vs. benchmark slices).
+2. **Explicit coverage** of attempted servers, with failures retained alongside successful probes.
 3. **Monthly refresh** with diff-based changelog (vs. static snapshots).
 
 ## Schema
@@ -116,4 +118,4 @@ servers = load_dataset("automatelab/mcp-servers-tool-catalog", "servers", split=
 
 ## Acknowledgements
 
-Built by [automatelab](https://automatelab.tech).
+Built by [automatelab](https://automatelab.tech). Companion site: [automatelab.tech/products/datasets/mcp-tool-catalog/](https://automatelab.tech/products/datasets/mcp-tool-catalog/). Pipeline source: [github.com/AutomateLab-tech/mcp-tool-catalog](https://github.com/AutomateLab-tech/mcp-tool-catalog).

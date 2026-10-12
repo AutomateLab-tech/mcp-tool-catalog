@@ -118,3 +118,13 @@ Each non-`ok` server gets one of these `status` values, derived by stderr patter
 ## License
 
 MIT for the pipeline code (this repo). CC-BY-4.0 for the dataset rows on HuggingFace.
+
+## Maintenance and verification
+
+See [the maintenance guide](docs/maintenance-guide.md) for interpretation limits, current tool names where applicable, and reproducible verification.
+
+## October 2026 snapshot
+
+926 attempted servers, 363 successful probes and 9,971 recorded tools. This refresh re-probed six owned servers only; other records retain their previous observation dates. Failed probes are explicit coverage gaps.
+
+Snapshot prepared 12 October 2026. Publication time is recorded separately in the release receipt.
